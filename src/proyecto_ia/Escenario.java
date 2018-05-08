@@ -28,7 +28,7 @@ public class Escenario extends JComponent implements Constantes {
             x = 0;
         }
 
-        c[0][3].cambiarTipo(TIPO_JUGADOR);
+        c[this.filaJugador][this.columnaJugador].cambiarTipo(TIPO_JUGADOR);
        
         c[5][5].cambiarTipo(TIPO_ENEMIGO);
         c[10][8].cambiarTipo(TIPO_ENEMIGO);
