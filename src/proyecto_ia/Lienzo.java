@@ -11,14 +11,17 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Lienzo extends Canvas implements Constantes, KeyListener{
+public class Lienzo extends Canvas implements Constantes, KeyListener {
+
     public Escenario escenario;
-    public Lienzo(){
+
+    public Lienzo() {
         escenario = new Escenario();
         this.setBackground(Color.ORANGE);
         this.addKeyListener(this);
         this.setFocusable(true);//
     }
+
     /*
     @Override
     public void paint(Graphics g){
@@ -26,18 +29,20 @@ public class Lienzo extends Canvas implements Constantes, KeyListener{
        
        escenario.paintComponent(g);
     }
-*/
+     */
     @Override
     public void update(Graphics g) {
-escenario.paintComponent(g);
-}
-@Override
-public void paint(Graphics g) {
-update(g);
-}
+        escenario.paintComponent(g);
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        update(g);
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
-       
+
     }
 
     @Override
@@ -49,6 +54,6 @@ update(g);
 
     @Override
     public void keyReleased(KeyEvent e) {
-       
+
     }
 }

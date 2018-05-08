@@ -9,10 +9,12 @@ public class Escenario extends JComponent implements Constantes {
     
 
     public Celda[][] c;
-    public int filaJugador = 2;//columna
-    public int columnaJugador = 2;//fila
+    //atributos para la posicion inicial del jugador
+    public int filaJugador = 2;//fila
+    public int columnaJugador = 2;//columna
 
     public Escenario() {
+        //matriz de celdas
         c = new Celda[NUMERO_CELDAS_ALTO][NUMERO_CELDAS_ANCHO];
 
         int x = 0;
@@ -27,9 +29,18 @@ public class Escenario extends JComponent implements Constantes {
             y += TAMAÑO_CELDA;
             x = 0;
         }
-
+        //se asigna a la celda el tipo jugador
         c[this.filaJugador][this.columnaJugador].cambiarTipo(TIPO_JUGADOR);
-       
+        
+        //dibujar muralla
+        for(int fil=0;fil<NUMERO_CELDAS_ALTO;fil++){
+            for(int col=0;col<NUMERO_CELDAS_ANCHO;col++){
+                if(fil==0 || col==0 || fil==NUMERO_CELDAS_ALTO-1 || col==NUMERO_CELDAS_ANCHO-1){
+                    System.out.println("c["+fil+"}["+col+"}");
+                    c[fil][col].cambiarTipo(TIPO_PARED);
+                }
+            }
+        }
         c[5][5].cambiarTipo(TIPO_ENEMIGO);
         c[10][8].cambiarTipo(TIPO_ENEMIGO);
     }
@@ -66,28 +77,32 @@ public class Escenario extends JComponent implements Constantes {
         switch (e.getKeyCode()) {
 
             case KeyEvent.VK_RIGHT:
-                if (c[this.filaJugador][this.columnaJugador + 1].objetenerTipo() == TIPO_ENEMIGO) {
+                if (c[this.filaJugador][this.columnaJugador + 1].objetenerTipo() == TIPO_ENEMIGO ||
+                       c[this.filaJugador][this.columnaJugador + 1].objetenerTipo()==TIPO_PARED ) {
                     System.out.println("perdiste");
                 } else {
                     this.moverJugadorDerecha();
                 }
                 break;
             case KeyEvent.VK_LEFT:
-                if (c[this.filaJugador][this.columnaJugador - 1].objetenerTipo() == TIPO_ENEMIGO) {
+                if (c[this.filaJugador][this.columnaJugador - 1].objetenerTipo() == TIPO_ENEMIGO ||
+                        c[this.filaJugador][this.columnaJugador - 1].objetenerTipo() == TIPO_PARED) {
                     System.out.println("perdiste");
                 } else {
                     this.moverJugadorIzquierda();
                 }
                 break;
             case KeyEvent.VK_DOWN:
-                if (c[this.filaJugador + 1][this.columnaJugador].objetenerTipo() == TIPO_ENEMIGO) {
+                if (c[this.filaJugador + 1][this.columnaJugador].objetenerTipo() == TIPO_ENEMIGO || 
+                        c[this.filaJugador + 1][this.columnaJugador].objetenerTipo() == TIPO_PARED) {
                     System.out.println("perdiste");
                 } else {
                     this.moverJugadorAbajo();
                 }
                 break;
             case KeyEvent.VK_UP:
-                if (c[this.filaJugador - 1][this.columnaJugador].objetenerTipo() == TIPO_ENEMIGO) {
+                if (c[this.filaJugador - 1][this.columnaJugador].objetenerTipo() == TIPO_ENEMIGO ||
+                        c[this.filaJugador - 1][this.columnaJugador].objetenerTipo() == TIPO_PARED) {
                     System.out.println("perdiste");
                 } else {
                     this.moverJugadorArriba();
